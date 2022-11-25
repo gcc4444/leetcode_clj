@@ -1,3 +1,7 @@
+- [11月24日](#11月24日)
+  - [两数之和\[简单\]](#两数之和简单)
+    - [题解](#题解)
+
 ## 11月24日
 ### 两数之和[简单]
 **1. O(N<sup>2</sup>)时间复杂度**
@@ -29,7 +33,7 @@ public:
            if (it != mp.end()) {
                return {i, it->second};
            }
-           mp.insert(pair<int, int>(nums[i], i));
+           mp.insert(pair<int, int>(nums[i], i));//等价于mp[nums[i]] = i;
        }
        return {};
     }
