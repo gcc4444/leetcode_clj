@@ -126,3 +126,48 @@ public:
     }
 };
 ```
+### 11. 盛最多水的容器[中等]
+1. 时间复杂度O(N)
+```cpp
+class Solution {
+public:
+    int area(int i, int j, int minHeight) {
+        return (j - i) * minHeight;
+    }
+    int maxArea(vector<int>& height) {
+        //i指向头，j指向尾；i,j向中间靠近，且是高度小的那边向中间靠
+        int i = 0, j = height.size() - 1;
+        int max = 0;//最大面积
+        while (i < j) {
+            int minHeight = height[i] < height[j] ? height[i] : height[j];
+            int temp = area(i, j, minHeight);
+            if (temp > max) {
+                max = temp;
+            }
+            if (height[i] < height[j]) {
+                i++;
+            }
+            else {
+                j--;
+            }
+        }
+        return max;
+    }
+};
+```
+2. 时间复杂度O(N)
+```cpp
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        int maxarea = 0;
+        for (int i = 0, j = height.size() - 1; i < j; ) {
+            int minheight = height[i] > height[j] ? height[j--] : height[i++];
+            int temparea = minheight * (j - i + 1);
+            maxarea = maxarea > temparea ? maxarea : temparea;
+        }
+        return maxarea;
+    }
+};
+```
+
