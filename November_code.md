@@ -55,7 +55,7 @@ public:
 
 ## 11.26
 ### 移动零[简单]
-1. 双指针法——两次循环，时间复杂度O(N)
+**1. 双指针法——两次循环，时间复杂度O(N)**
 ```cpp
 class Solution {
 public:
@@ -79,7 +79,7 @@ public:
     }
 };
 ```
-2. 双指针法——一次循环，时间复杂度O(N)
+**2. 双指针法——一次循环，时间复杂度O(N)**
 ```cpp
 class Solution {
 public:
@@ -108,7 +108,7 @@ public:
     }
 };
 ```
-3. 双指针法——一次循环，去除重复赋值，时间复杂度O(N)
+**3. 双指针法——一次循环，去除重复赋值，时间复杂度O(N)**
 ```cpp
 class Solution {
 public:
@@ -127,7 +127,7 @@ public:
 };
 ```
 ### 11. 盛最多水的容器[中等]
-1. 时间复杂度O(N)
+**1. 时间复杂度O(N)——直观想法**
 ```cpp
 class Solution {
 public:
@@ -155,7 +155,7 @@ public:
     }
 };
 ```
-2. 时间复杂度O(N)
+**2. 时间复杂度O(N)——课程解法 :o:**
 ```cpp
 class Solution {
 public:
@@ -170,4 +170,43 @@ public:
     }
 };
 ```
-
+### 15. 三数之和[中等]
+**1. 排序+哈希法，时间复杂度O(N<sup>3</sup>)**
+```cpp
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        vector<vector<int>> res;
+        sort(nums.begin(), nums.end());//[-4,-1,-1,0,1,2]
+        for (int i = 0; i < nums.size(); i++) {
+            //加快速度
+            if (nums[i] > 0) {
+                break;
+            }
+            if (i > 0 && nums[i] == nums[i - 1]) {
+                continue;//第一个元素去重
+            }
+            unordered_set<int> set;//哈希set，不会重复，且find时间O(1)
+            for (int j = i + 1; j < nums.size(); j++) {
+                int c = 0 - nums[i] - nums[j];
+                if (j > i + 2 && nums[j] == nums[j - 1] && nums[j - 1] == nums[j - 2]) {//j > i + 2 就不会把nums[i]当作nums[j - 2]了。
+                    continue;//如果nums[j] = c，如[-2, 1, 1, 1, 1],nums[i] = -2,
+                    //nums[j] = c = 1; 仅仅通过set.erase(c),无法保证后续再次插入，然后find
+                }
+                if (set.find(c) != set.end()) {
+                    res.push_back({nums[i], c, nums[j]});
+                    set.erase(c);//防止{c, nums[j]}重复，若下一个nums[j]=nums[j-1],可能重
+                }//set.erase()时间复杂度O(N) 导致整个算法时间复杂度为O(N^3)
+                else {//else才插入，如果找到一解，在nums[i]固定的情况下，
+                      //nums[j]必定不会作为c在以后再被当作解
+                    set.insert(nums[j]);
+                }
+            }
+        }
+        return res;
+    }
+};
+```
+**2. 排序+双指针，时间复杂度O(N<sup>2</sup>)**
+```cpp
+```
