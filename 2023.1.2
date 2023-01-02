@@ -1,0 +1,59 @@
+232. 用栈实现队列
+
+```c++
+class MyQueue {
+public:
+    MyQueue() {
+
+    }
+    
+    void push(int x) {
+        stcIn.push(x);
+    }
+    
+    int pop() {
+        if (stcOut.empty()) {
+            while (!stcIn.empty()) {
+                int temp = stcIn.top();
+                stcIn.pop();
+                stcOut.push(temp);
+            }
+        }
+            int res = stcOut.top();
+            stcOut.pop();
+            return res;
+        
+    }
+    
+    int peek() {
+        int res = this->pop();
+        stcOut.push(res);
+        return res;
+    }
+    
+    bool empty() {
+        return stcIn.empty() && stcOut.empty();
+    }
+private:
+    stack<int> stcIn;
+    stack<int> stcOut;
+};
+```
+**1. O(N<sup>2</sup>)时间复杂度**
+```c++
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        vector<int> res;
+        for (int i = 0; i < nums.size() - 1; i++) {
+            for (int j = i + 1; j < nums.size(); j++ ) {
+                if (nums[i] + nums[j] == target) {
+                    res.push_back(i), res.push_back(j);
+                    return res;
+                }
+            }
+        }
+        return res;
+    }
+};
+```
