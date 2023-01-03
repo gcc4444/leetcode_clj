@@ -1,3 +1,14 @@
+## [20. 有效的括号](https://leetcode.cn/problems/valid-parentheses/)
+### 题目要求
+`有效字符串需满足：`
+```
+左括号必须用相同类型的右括号闭合。
+左括号必须以正确的顺序闭合。
+每个右括号都有一个对应的相同类型的左括号。
+```
+
+### 代码
+```c++
 class Solution {
 public:
     bool isValid(string s) {
@@ -22,3 +33,7 @@ public:
         return st.empty();//如果st为空，说明刚刚好都匹配上了。如果st不为空，说明 3. 左括号多了
     }
 };
+```
+### 参考解答
+1. [代码随想录](https://www.programmercarl.com/0020.有效的括号.html#进入正题)
+2. [视频讲解](https://www.bilibili.com/video/BV1AF411w78g)
