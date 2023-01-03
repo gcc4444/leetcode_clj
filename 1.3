@@ -1,0 +1,24 @@
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<char> st;
+        for (int i = 0; i < s.size(); i++) {
+            if (s[i] == '{') {
+                st.push('}');
+            }
+            else if (s[i] == '[') {
+                st.push(']');
+            }
+            else if (s[i] == '(') {
+                st.push(')');
+            }//st.empty()没匹配完栈就空了， 1. 多了右括号；栈不空，但是栈顶不为s[i]——>2. 不匹配
+            else if (st.empty() || s[i] != st.top()) {
+                return false;
+            }
+            else {
+                st.pop();//遇到又括号，栈不为空且s[i]==st.top()；说明匹配上了；
+            }
+        }
+        return st.empty();//如果st为空，说明刚刚好都匹配上了。如果st不为空，说明 3. 左括号多了
+    }
+};
